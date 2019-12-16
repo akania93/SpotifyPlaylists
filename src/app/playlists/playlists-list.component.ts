@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'playlists-list',
@@ -6,6 +6,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     `
     .playlist-row {
       border-bottom: 2px solid transparent;
+    }
+    .table-active {
+      background-color: rgba(241, 211, 0, 0.2) !important;
     }
     `
   ],
@@ -21,10 +24,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let playlist of playlists; let i = index" class="playlist-row"
-          [ngClass]="{'table-active': selected == playlist}" 
+        <tr *ngFor="let playlist of playlists; let i = index" class="playlist-row" 
           [ngStyle]="{ borderBottomColor: playlist.color }"
-          [routerLink]="[playlist.id]">
+          [routerLink]="[playlist.id]" routerLinkActive="table-active">
           <td> {{ i + 1 }}. </td>
           <td> {{ playlist.name }} </td>
           <td> {{ playlist.tracks }} </td>
@@ -36,7 +38,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
       </tbody>
     </table>
     <div class="form-group">
-      <button [routerLink]="['new']" class="btn btn-success float-xs-right">Nowa Playlista</button>
+      <button 
+        [routerLink]="['new']" class="btn btn-success float-xs-right">
+        Nowa Playlista
+      </button>
     </div>
   </div>
   `
@@ -44,17 +49,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PlaylistsListComponent implements OnInit {
 
   @Input() playlists;
-  @Input() selected;
-
-  @Output('selected') onSelected = new EventEmitter();
-
-  select(playlist){
-    this.onSelected.emit(playlist);
-  }
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

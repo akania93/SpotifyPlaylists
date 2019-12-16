@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlaylistsService } from './playlists.service';
 
@@ -50,6 +50,7 @@ export class PlaylistFormComponent implements OnInit {
 
   save(playlist) {
     this.playlistsService.savePlaylist(playlist);
+    // Nawigacja z kodu
     this.router.navigate(['playlist', playlist.id]);
   }
 }

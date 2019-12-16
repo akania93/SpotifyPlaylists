@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PlaylistsService } from './playlists.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { PlaylistsService } from './playlists.service';
       <p class="card-text">Tracks: {{playlist.tracks}}</p>
       <p *ngIf="playlist.favourite">Ulubiona</p>
       <div class="form-group">
-        <button class="btn btn-warning float-xs-right" (click)="edit(playlist)">Edytuj</button>
+        <button [routerLink]="['/playlist', playlist.id, 'edit']"  class="btn btn-warning float-xs-right" >Edytuj</button>
       </div>
     </div>
   `,
@@ -23,15 +23,8 @@ export class PlaylistDetailComponent implements OnInit {
 
   playlist;
 
-  // Nawigacja z kodu/
-  // Można było oczywiście użyc 'routerLink' na buttonie.
-  edit(playlist) {
-    this.router.navigate(['playlist', playlist.id, 'edit'])
-  }
-
   constructor(private activeRoute:ActivatedRoute,
-              private playlistsService:PlaylistsService,
-              private router:Router) { }
+              private playlistsService:PlaylistsService) { }
 
   ngOnInit() {
     // Reaguje na zmiany w parametrach przez co jest to:
