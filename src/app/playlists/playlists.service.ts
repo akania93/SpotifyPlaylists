@@ -14,6 +14,11 @@ export class PlaylistsService {
     return this.playlists;
   }
 
+  getPlaylist(id) {
+    let playlist_origin = this.playlists.find(playlist => playlist.id === id);
+    return Object.assign({}, playlist_origin);
+  }
+
   createPlaylist() {
     var newPlaylist = {
       name: '',

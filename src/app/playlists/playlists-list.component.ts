@@ -24,7 +24,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
         <tr *ngFor="let playlist of playlists; let i = index" class="playlist-row"
           [ngClass]="{'table-active': selected == playlist}" 
           [ngStyle]="{ borderBottomColor: playlist.color }"
-          (click)="select(playlist)">
+          [routerLink]="[playlist.id]">
           <td> {{ i + 1 }}. </td>
           <td> {{ playlist.name }} </td>
           <td> {{ playlist.tracks }} </td>
@@ -36,7 +36,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
       </tbody>
     </table>
     <div class="form-group">
-      <button class="btn btn-success float-xs-right" (click)="createNew($event)">Nowa Playlista</button>
+      <button [routerLink]="['new']" class="btn btn-success float-xs-right">Nowa Playlista</button>
     </div>
   </div>
   `
@@ -47,14 +47,9 @@ export class PlaylistsListComponent implements OnInit {
   @Input() selected;
 
   @Output('selected') onSelected = new EventEmitter();
-  @Output() onCreate = new EventEmitter();
 
   select(playlist){
     this.onSelected.emit(playlist);
-  }
-
-  createNew(playlist){
-    this.onCreate.emit(playlist);
   }
 
   constructor() { }

@@ -5,32 +5,23 @@
 </div>
 
 <div class="row mt-1">
-  <!-- Lista -->
-  <div class="col-md-6">
-    <playlists-list 
-    [playlists]="playlists" 
-    [selected]="selected" 
-    (selected)="select($event)"
-    (onCreate)="createNew($event)"
-    ></playlists-list>
-  </div>
   
-  <div class="col-md-6">
+  <!-- <div class="col-md-6">
     <div [ngSwitch]="mode">
       
-      <!-- default -->
+
       <content-card *ngSwitchDefault title="Playlista">
         <p>Wybierz <b>playlistę</b>!</p>
       </content-card>
 
-      <!-- selected -->
+ 
       <content-card *ngSwitchCase="'selected'" title="Playlista {{selected.name}}">
           <playlist-detail
           [playlist]="selected"
           (onEdit)="edit($event)"></playlist-detail>
       </content-card>
       
-      <!-- edit -->
+
       <content-card *ngSwitchCase="'edit'" title="Playlista {{edited.name}} - edycja">
           <playlist-form 
           [playlist]="edited" 
@@ -38,5 +29,30 @@
       </content-card>
 
     </div>
+  </div> -->
+
+
+
+  <!-- Zagnieżdżony routing -->
+  <div class="col-md-6">
+    <content-card>
+        <router-outlet></router-outlet>
+    </content-card>
   </div>
+
+  <!-- Lista -->
+  <div class="col-md-6">
+      <playlists-list 
+      [playlists]="playlists" 
+      [selected]="selected" 
+      ></playlists-list>
+    </div>
+  <!-- <div class="col-md-6">
+    <playlists-list 
+    [playlists]="playlists" 
+    [selected]="selected" 
+    (onCreate)="createNew($event)"
+    ></playlists-list>
+  </div> -->
+  
 </div>
