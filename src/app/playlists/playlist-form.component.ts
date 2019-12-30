@@ -42,7 +42,7 @@ export class PlaylistFormComponent implements OnInit {
       let id = parseInt(params['id']);
       if(id) {
         this.playlist = this.playlistsService.getPlaylist(id);
-      } else {
+      } else { // w sytuacji gdy nie przyjdzie 'id' tylko routing z "new"
         this.playlist = this.playlistsService.createPlaylist();
       }
     })
