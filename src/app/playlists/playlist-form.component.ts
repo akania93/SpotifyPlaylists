@@ -15,7 +15,7 @@ import { PlaylistsService } from './playlists.service';
       box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
 
-    .was-validated .form-control:valid {
+    .was-validated .form-control.ng-untouched:valid {
       background-image: none;
       border: 1px solid #ced4da;
     }
@@ -30,14 +30,34 @@ import { PlaylistsService } from './playlists.service';
           <label>Nazwa:</label>
           <input type="text" #nameRef="ngModel" [(ngModel)]="playlist.name" name="name" class="form-control" minlength="3" required>
           <div class="invalid-feedback" *ngIf="nameRef.touched || nameRef.dirty || formRef.submitted">
-            <div class="" *ngIf="nameRef.errors?.required">To pole jest wymagane</div>
-            <div class="" *ngIf="nameRef.errors?.minlength">To pole musi mieć przynajmniej {{nameRef.errors.minlength.requiredLength}} znak(i)/-ów</div>
+            <div *ngIf="nameRef.errors?.required">To pole jest wymagane</div>
+            <div *ngIf="nameRef.errors?.minlength">To pole musi mieć przynajmniej {{nameRef.errors.minlength.requiredLength}} znak(i)/-ów</div>
           </div>
         </div>
         <div class="form-group">
           <label>Utwory:</label>
           <input type="text" [value]="playlist.tracks + ' utwory'" disabled class="form-control">
         </div>
+        
+        <div class="form-group">
+          <label class="w-100"> Radio Kategoria:</label>
+          <div *ngFor="let radioCategory of radioCategories" class="form-check-inline">
+            <label class="form-check-label">
+              <input type="radio" class="form-check-input" name="radioCategory" 
+                      [(ngModel)]="playlist.radioCategory" [value]="radioCategory"> 
+              {{radioCategory}} 
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="w-100">Kategoria:</label>
+          <select class="form-control" [(ngModel)]="playlist.category" name="category">
+            <option *ngFor="let category of categories" 
+                    [value]="category">{{category}}</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <label>Kolor:</label>
           <input type="color" [(ngModel)]="playlist.color" name="color">
@@ -56,6 +76,8 @@ import { PlaylistsService } from './playlists.service';
 export class PlaylistFormComponent implements OnInit {
 
   playlist;
+  radioCategories = ['Filmowa', 'Rockowa', 'Inne'];
+  categories = ['Filmowa', 'Rockowa', 'Inne'];
 
   constructor(private activeRoute: ActivatedRoute,
     private playlistsService: PlaylistsService,
