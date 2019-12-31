@@ -13,7 +13,7 @@ import { PlaylistsService } from './playlists.service';
       <p class="card-text">Tracks: {{playlist.tracks}}</p>
       <p *ngIf="playlist.favourite">Ulubiona</p>
       <div class="form-group">
-        <button [routerLink]="['/playlist', playlist.id, 'edit']"  class="btn btn-warning float-xs-right">Edytuj</button>
+        <button [routerLink]="['/playlist', playlist.id, 'edit']"  class="btn btn-secondary float-right">Edytuj</button>
       </div>
     </div>
   `,

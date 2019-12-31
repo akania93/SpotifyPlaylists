@@ -22,7 +22,7 @@ export class AlbumSearchFormComponent implements OnInit {
   constructor(private musicSearchService: MusicSearchService) { 
     
     this.searchForm = new FormGroup({
-      'query': new FormControl('witcher') // Mozna tu pisac początkową
+      'query': new FormControl('') // Mozna tu pisac początkową
     });
 
     this.searchForm.get('query').valueChanges
