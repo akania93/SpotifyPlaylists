@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { MusicSharedModule } from '../music-shared/music-shared.module';
+
 import { PlaylistsComponent } from './playlists.component';
 import { ContentCardComponent } from './content-card.component';
 import { PlaylistFormComponent } from './playlist-form.component';
@@ -9,7 +11,7 @@ import { PlaylistsListComponent } from './playlists-list.component';
 import { PlaylistDetailComponent } from './playlist-detail.component';
 
 import { PlaylistsService } from './playlists.service';
-import playlistsData from './playlists.data';
+// import playlistsData from './playlists.data';
 
 // routing
 import { routerModule } from './playlist.routing'
@@ -18,6 +20,7 @@ import { routerModule } from './playlist.routing'
   imports: [
     CommonModule,
     FormsModule,
+    MusicSharedModule,
     routerModule
   ],
   declarations: [
@@ -37,7 +40,7 @@ import { routerModule } from './playlist.routing'
     // I zmieniasz tylko w 1 miejscu gdy potrzebujesz.
     // { provide: PlaylistsService, useClass: EXTENDED_PlaylistsService }
     // Natomiast skrócony zapis jesli Serwis się nazywa tak samo jak klasa
-    PlaylistsService,
+    //PlaylistsService,
 
     //---- 1. Z pliku
     // Jeśli nie ma to byc klasa, czyli bez iperatora 'new'. Moga to być tablice, obiekt itp.

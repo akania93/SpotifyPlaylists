@@ -8,11 +8,11 @@ import { MusicSearchComponent } from './music-search.component';
 import { AlbumCardComponent } from './album-card.component';
 import { MusicSearchService } from './music-search.service';
 import { AlbumSearchFormComponent } from './album-search-form.component';
-import { AlbumDetailsComponent } from './album-details.component'
+import { AlbumDetailsComponent } from './album-details.component';
+import { MusicSharedModule } from '../music-shared/music-shared.module';
 
 // routing
 import { routerModule } from './music-search.routing';
-import { TrackListComponent } from './track-list.component';
 
 @NgModule({
   imports: [
@@ -20,10 +20,11 @@ import { TrackListComponent } from './track-list.component';
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
+    MusicSharedModule,
     routerModule
   ],
   declarations: [
-    MusicSearchComponent, AlbumListComponent, AlbumCardComponent, AlbumSearchFormComponent, AlbumDetailsComponent, TrackListComponent
+    MusicSearchComponent, AlbumListComponent, AlbumCardComponent, AlbumSearchFormComponent, AlbumDetailsComponent
   ],
   exports: [
     MusicSearchComponent

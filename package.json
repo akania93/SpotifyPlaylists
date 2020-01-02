@@ -1,5 +1,5 @@
 {
-  "name": "angular2",
+  "name": "SpotifyPlaylists",
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
@@ -21,8 +21,10 @@
     "@angular/platform-browser-dynamic": "^4.2.0",
     "@angular/router": "^4.2.0",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
+    "font-awesome": "^4.7.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

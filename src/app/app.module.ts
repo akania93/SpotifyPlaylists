@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { MusicSearchModule } from './music-search/music-search.module';
+import { MusicSharedModule } from './music-shared/music-shared.module';
+
+import { PlaylistsService } from './playlists/playlists.service';
+import { PlaylistSelectionService } from './music-shared/playlist-selection.service';
 
 // routing
 import { routerModule } from './app.routing';
@@ -25,10 +29,13 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     HttpModule,
     PlaylistsModule,
     MusicSearchModule,
+    MusicSharedModule,
     routerModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    PlaylistsService,
+    PlaylistSelectionService
   ],
   bootstrap: [AppComponent]
 })

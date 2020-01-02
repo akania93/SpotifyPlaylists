@@ -19,6 +19,10 @@ import { PlaylistsService, Playlist } from './playlists.service';
       background-image: none;
       border: 1px solid #ced4da;
     }
+
+    .playlist-form-table {
+      font-size: 12px;
+    }
     `
   ],
   template: `
@@ -34,11 +38,31 @@ import { PlaylistsService, Playlist } from './playlists.service';
             <div *ngIf="nameRef.errors?.minlength">To pole musi mieć przynajmniej {{nameRef.errors.minlength.requiredLength}} znak(i)/-ów</div>
           </div>
         </div>
+
         <div class="form-group">
-          <label>Utwory:</label>
-          <input type="text" [value]="playlist.tracks + ' utwory'" disabled class="form-control">
+          <label>Opis:</label>
+          <textarea #descriptionRef="ngModel" [(ngModel)]="playlist.description" name="description" class="form-control" minlength="10" required></textarea>
+          <div class="invalid-feedback" *ngIf="descriptionRef.touched || descriptionRef.dirty || formRef.submitted">
+            <div *ngIf="descriptionRef.errors?.required">To pole jest wymagane</div>
+            <div *ngIf="descriptionRef.errors?.minlength">To pole musi mieć przynajmniej {{descriptionRef.errors.minlength.requiredLength}} znak(i)/-ów</div>
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="playlist.tracks.length">
+          <label>Utwory:</label>     
+          <table class="table table-sm table-striped playlist-form-table">
+            <tbody>
+              <tr *ngFor="let track of playlist.tracks; let i = index">
+                <td>{{i+1}}.</td>
+                <td>{{track.name}}</td>
+                <td><span *ngFor="let artist of track.artists">{{artist.name}}, </span></td>
+                <td class="float-right">{{msToTime(track.duration_ms)}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         
+        <!--
         <div class="form-group">
           <label class="w-100"> Radio Kategoria:</label>
           <div *ngFor="let radioCategory of radioCategories" class="form-check-inline">
@@ -49,6 +73,7 @@ import { PlaylistsService, Playlist } from './playlists.service';
             </label>
           </div>
         </div>
+        -->
 
         <div class="form-group">
           <label class="w-100">Kategoria:</label>
@@ -61,11 +86,11 @@ import { PlaylistsService, Playlist } from './playlists.service';
         <div class="form-group">
           <label>Kolor:</label>
           <input type="color" [(ngModel)]="playlist.color" name="color">
-        </div>
-        <div class="form-group">
-          <label><input type="checkbox" [(ngModel)]="playlist.favourite" name="favourite">
+
+          <label class="float-right"><input type="checkbox" [(ngModel)]="playlist.favourite" name="favourite">
             Ulubiona</label>
         </div>
+
         <div class="form-group">
           <button class="btn btn-success float-right" type="submit">Zapisz</button>
         </div>
@@ -76,8 +101,8 @@ import { PlaylistsService, Playlist } from './playlists.service';
 export class PlaylistFormComponent implements OnInit {
 
   playlist: Playlist;
-  radioCategories = ['Filmowa', 'Rockowa', 'Inne'];
-  categories = ['Filmowa', 'Rockowa', 'Inne'];
+  // radioCategories = ['Filmowa', 'Rockowa', 'Inne'];
+  categories = [];
 
   constructor(private activeRoute: ActivatedRoute,
     private playlistsService: PlaylistsService,
@@ -95,7 +120,12 @@ export class PlaylistFormComponent implements OnInit {
       } else { // w sytuacji gdy nie przyjdzie 'id' tylko routing z "new"
         this.playlist = this.playlistsService.createPlaylist();
       }
-    })
+    });
+
+    this.playlistsService.getPlaylistCategories()
+    .subscribe(response => {
+      this.categories = response;
+    });
   }
 
   save(playlist, valid) {
@@ -103,9 +133,29 @@ export class PlaylistFormComponent implements OnInit {
       return;
 
     this.playlistsService.savePlaylist(playlist)
-    .subscribe(addedOrUpdatedPlaylist => {
-      // Nawigacja z kodu
-      this.router.navigate(['playlist', addedOrUpdatedPlaylist.id]);
-    });
+      .subscribe(addedOrUpdatedPlaylist => {
+        // Nawigacja z kodu
+        this.router.navigate(['playlist', addedOrUpdatedPlaylist.id]);
+      });
   }
+
+  private msToTime(s) {
+    var ms = s % 1000;
+    s = (s - ms) / 1000;
+    var secs = s % 60;
+    s = (s - secs) / 60;
+    var mins = s % 60;
+    var hrs = (s - mins) / 60;
+
+    function pad(n) {
+      return ('00' + n).slice(-2);
+    }
+
+    return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+  }
+}
+
+interface Artist {
+  name: string,
+  href: string
 }

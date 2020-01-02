@@ -4,19 +4,13 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'content-card',
   template: `
     <div class="card">
-      <div class="card-block">
+      <div class="card-body">
         <h4 class="card-title">{{title}}</h4>
         <ng-content class="card-text"></ng-content>
       </div>
     </div>
   `,
-  styles: [
-    `
-    .card {
-      padding: 15px;
-    }
-    `
-  ],
+  styles: [],
 })
 export class ContentCardComponent implements OnInit {
 

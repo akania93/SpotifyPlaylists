@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'album-list',
   template: `
-    <div class="card-deck card-deck-justify">
 
     <div class="card-deck card-deck-justify">
      <album-card [album]="album"
