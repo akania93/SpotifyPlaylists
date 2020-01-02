@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PlaylistsService } from './playlists.service';
+import { PlaylistsService, Playlist } from './playlists.service';
 
 @Component({
   selector: 'playlist-form',
@@ -75,7 +75,7 @@ import { PlaylistsService } from './playlists.service';
 })
 export class PlaylistFormComponent implements OnInit {
 
-  playlist;
+  playlist: Playlist;
   radioCategories = ['Filmowa', 'Rockowa', 'Inne'];
   categories = ['Filmowa', 'Rockowa', 'Inne'];
 
@@ -87,7 +87,11 @@ export class PlaylistFormComponent implements OnInit {
     this.activeRoute.params.subscribe(params => {
       let id = parseInt(params['id']);
       if (id) {
-        this.playlist = this.playlistsService.getPlaylist(id);
+        this.playlistsService.getPlaylist(id)
+          .subscribe((playlist: Playlist) => {
+            this.playlist = playlist;
+            this.playlist = Object.assign({}, playlist); // nie wymagane bo dane z serwera i tak są.
+          });
       } else { // w sytuacji gdy nie przyjdzie 'id' tylko routing z "new"
         this.playlist = this.playlistsService.createPlaylist();
       }
@@ -98,8 +102,10 @@ export class PlaylistFormComponent implements OnInit {
     if (!valid)
       return;
 
-    this.playlistsService.savePlaylist(playlist);
-    // Nawigacja z kodu
-    this.router.navigate(['playlist', playlist.id]);
+    this.playlistsService.savePlaylist(playlist)
+    .subscribe(addedOrUpdatedPlaylist => {
+      // Nawigacja z kodu
+      this.router.navigate(['playlist', addedOrUpdatedPlaylist.id]);
+    });
   }
 }

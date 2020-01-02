@@ -42,7 +42,7 @@ import { routerModule } from './playlist.routing'
     //---- 1. Z pliku
     // Jeśli nie ma to byc klasa, czyli bez iperatora 'new'. Moga to być tablice, obiekt itp.
     // A klucz podajemy w stringu tutaj 'PlaylistsData'
-    {provide: 'PlaylistsData', useValue: playlistsData}
+    //{provide: 'PlaylistsData', useValue: playlistsData}
     
     //---- 2. useFactory dodanie do pliku
     /*

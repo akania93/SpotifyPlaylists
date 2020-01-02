@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PlaylistsService } from './playlists.service';
+import { PlaylistsService, Playlist } from './playlists.service';
 
 @Component({
   selector: 'playlist-detail',
@@ -21,7 +21,7 @@ import { PlaylistsService } from './playlists.service';
 })
 export class PlaylistDetailComponent implements OnInit {
 
-  playlist;
+  playlist: Playlist;
 
   constructor(private activeRoute:ActivatedRoute,
               private playlistsService:PlaylistsService) { }
@@ -32,7 +32,10 @@ export class PlaylistDetailComponent implements OnInit {
     this.activeRoute.params.subscribe(params => {
       let id = parseInt(params['id']);
       if(id) {
-        this.playlist = this.playlistsService.getPlaylist(id);
+        this.playlistsService.getPlaylist(id)
+          .subscribe((playlist: Playlist) => {
+            this.playlist = playlist;
+          });
       }
     })
   }
