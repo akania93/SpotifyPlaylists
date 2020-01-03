@@ -6,8 +6,8 @@ import { PlaylistsService } from '../playlists/playlists.service';
   selector: 'playlist-selector',
   template: `
     <div class="input-group">
-      <label class="col-form-label mr-3">Aktywna Playlista: </label>
-      <select class=" form-control" [ngModel]="selectedId"
+      <label class="col-form-label mr-3 selector-label">Aktywna playlista: </label>
+      <select class="form-control" [ngModel]="selectedId"
       (ngModelChange)="setSelected($event)">
         <option *ngFor="let playlist of playlists" [value]="playlist.id">
           {{playlist.name}} ({{playlist.tracks?.length}})
@@ -15,7 +15,16 @@ import { PlaylistsService } from '../playlists/playlists.service';
       </select>
     </div>
   `,
-  styles: []
+  styles: [
+    `
+    label.selector-label {
+      color: rgba(0, 0, 0, 0.5);
+    }
+    select {
+      padding-left: 8px;
+    }
+    `
+  ]
 })
 export class PlaylistSelectorComponent implements OnInit {
 
