@@ -5,24 +5,15 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'album-list',
   template: `
-
-    <div class="card-deck card-deck-justify">
+    <div class="card-deck justify-content-around">
      <album-card [album]="album"
                  [routerLink]="['album', album.id]" 
                  class="card"
                  *ngFor="let album of albums | async "
       ></album-card>
     </div>
-  `,
-  styles: [`
-    .card {
-      margin-left: 0;
-    }
-
-    .card-deck-justify {
-      justify-content: space-between;
-    }
-  `]
+    `,
+  styles: []
 })
 export class AlbumListComponent implements OnInit {
 

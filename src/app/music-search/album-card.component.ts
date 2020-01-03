@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   template: `
     <img class="card-img-top img-fluid" [src]="image.url">
     <div class="card-img-overlay">
-      <h5 class="card-title">{{album.name}}</h5>
+      <h6 class="card-title">{{album.name}}</h6>
     </div>
   `,
   styles: [`
@@ -27,6 +27,13 @@ import { Component, OnInit, Input } from '@angular/core';
       font-size: 1em !important;
       transition: .2s top ease-out;
     }
+
+    @media only screen and (min-width: 576px) and (max-width: 1200px) {
+      .card-img-overlay .card-title {
+        font-size: 14px;
+      }
+    }
+
   `]
 })
 export class AlbumCardComponent implements OnInit {

@@ -5,14 +5,14 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'album-details',
   template: `
-    <div class="row mt-1" *ngIf="album">
-      <div class="col">
+    <div class="row mt-4" *ngIf="album">
+      <div class="col-5 mt-4">
 
         <album-card class="card" [album]="album"></album-card>
         
       </div>
-      <div class="col">
-        <h4 class="display-3 mb-2 float-xs-right">Utwory</h4>
+      <div class="col-7">
+        <h4 class="display-3 mb-2 float-right">Utwory</h4>
         
         <track-list [tracks]="album.tracks.items"></track-list>
 

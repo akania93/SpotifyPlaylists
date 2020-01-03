@@ -47,7 +47,7 @@ import { PlaylistSelectionService } from './playlist-selection.service';
           <!-- <i class="fa fa-play"></i></button> -->
           <button class="btn btn-sm btn-primary mr-1" (click)="play(audio_id, track)">></button>
           <button class="btn btn-sm btn-success" (click)="addToPlaylist(track)">+</button>
-          <button *ngIf="allowDelete" class="btn btn-sm btn-danger ml-1" (click)="onDelete(track)">x</button>
+          <button *ngIf="isInsidePlaylist" class="btn btn-sm btn-danger ml-1" (click)="onDelete(track)">x</button>
         </td>
       </tr>
     </tbody>
@@ -57,7 +57,7 @@ import { PlaylistSelectionService } from './playlist-selection.service';
 export class TrackListComponent implements OnInit {
 
   @Input() tracks;
-  @Input() allowDelete: boolean = false;
+  @Input() isInsidePlaylist: boolean = false;
   @Output() onDeleteTrack = new EventEmitter();
 
   constructor(private playlistSelectionService: PlaylistSelectionService) {  }

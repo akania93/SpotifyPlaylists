@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AuthService } from './auth.service';
 
@@ -6,8 +6,9 @@ import { AuthService } from './auth.service';
   selector: 'app-main',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   apiUrl = 'https://api.spotify.com/v1/search?type=album&query=metallica';
+  currentDate;;
 
   // constructor(private http: Http, private auth: AuthService) {
   //   this.http.get('https://api.spotify.com/v1/search?type=album&query=metallica')
@@ -17,6 +18,8 @@ export class AppComponent {
   // }
 
 constructor(private http: Http, private auth: AuthService) {
+  
+
   this.http.get(this.apiUrl).subscribe(
     // (value) => { console.log('app.component constructor received value: ', value.json()) },
     (value) => null,
@@ -27,6 +30,10 @@ constructor(private http: Http, private auth: AuthService) {
     // ,
     // () => { console.log('End of values') }
   );
+}
+
+ngOnInit() {
+  this.currentDate = new Date().getFullYear();
 }
 
 }

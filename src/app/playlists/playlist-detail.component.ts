@@ -28,7 +28,7 @@ import { PlaylistsService, Playlist } from './playlists.service';
       </h3>
       <p class="card-text">{{playlist.description}}</p>
 
-      <track-list [tracks]="playlist.tracks" [allowDelete]="true" (onDeleteTrack)="deleteTrackFromPlaylist($event)"></track-list>
+      <track-list [tracks]="playlist.tracks" [isInsidePlaylist]="true" (onDeleteTrack)="deleteTrackFromPlaylist($event)"></track-list>
 
       <p *ngIf="playlist.favourite">Ulubiona</p>
       <div class="form-group">

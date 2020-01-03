@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+.clear:before, .clear:after {
+    content: "";
+    display: table;
+}
+
+.clear:after { clear: both; }
+
+.clear { zoom: 1; }
+
+
 #Main.container-fluid {
     padding-right: 0;
     padding-left: 0;
+}
+
+/* card deck */
+.card-deck .card {
+    margin: auto;
+    min-width: 270px;
 }
