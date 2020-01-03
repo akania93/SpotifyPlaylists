@@ -146,16 +146,9 @@ export class PlaylistFormComponent implements OnInit {
     s = (s - secs) / 60;
     var mins = s % 60;
     var hrs = (s - mins) / 60;
-
     function pad(n) {
       return ('00' + n).slice(-2);
     }
-
     return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
   }
-}
-
-interface Artist {
-  name: string,
-  href: string
 }

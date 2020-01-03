@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlaylistSelectionService } from './playlist-selection.service';
-import { PlaylistsService } from '../playlists/playlists.service';
 
 @Component({
   selector: 'track-list',
@@ -48,7 +47,7 @@ import { PlaylistsService } from '../playlists/playlists.service';
           <!-- <i class="fa fa-play"></i></button> -->
           <button class="btn btn-sm btn-primary mr-1" (click)="play(audio_id, track)">></button>
           <button class="btn btn-sm btn-success" (click)="addToPlaylist(track)">+</button>
-          <button *ngIf="allowDelete" class="btn btn-sm btn-danger ml-1" (click)="deleteFromPlaylist(track)">x</button>
+          <button *ngIf="allowDelete" class="btn btn-sm btn-danger ml-1" (click)="onDelete(track)">x</button>
         </td>
       </tr>
     </tbody>
@@ -59,10 +58,9 @@ export class TrackListComponent implements OnInit {
 
   @Input() tracks;
   @Input() allowDelete: boolean = false;
-  @Input() playlistId: number = 0;
+  @Output() onDeleteTrack = new EventEmitter();
 
-  constructor(private playlistSelectionService: PlaylistSelectionService,
-              private playlistsService: PlaylistsService) {  }
+  constructor(private playlistSelectionService: PlaylistSelectionService) {  }
 
   ngOnInit() {  }
 
@@ -84,8 +82,8 @@ export class TrackListComponent implements OnInit {
     this.playlistSelectionService.addToPlaylist(track);
   }
 
-  deleteFromPlaylist(track) {
-    this.playlistsService.deleteTrackFromPlaylist(this.playlistId, track);
+  onDelete(track) {
+    this.onDeleteTrack.emit(track);
   }
 
 }

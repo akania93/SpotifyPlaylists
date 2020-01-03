@@ -28,7 +28,7 @@ import { PlaylistsService, Playlist } from './playlists.service';
       </h3>
       <p class="card-text">{{playlist.description}}</p>
 
-      <track-list [tracks]="playlist.tracks" [allowDelete]="true" [playlistId]="playlist.id"></track-list>
+      <track-list [tracks]="playlist.tracks" [allowDelete]="true" (onDeleteTrack)="deleteTrackFromPlaylist($event)"></track-list>
 
       <p *ngIf="playlist.favourite">Ulubiona</p>
       <div class="form-group">
@@ -43,6 +43,10 @@ export class PlaylistDetailComponent implements OnInit {
 
   constructor(private activeRoute:ActivatedRoute,
               private playlistsService:PlaylistsService) { }
+
+  deleteTrackFromPlaylist(track) {
+    this.playlistsService.deleteTrackFromPlaylist(this.playlist, track);
+  }
 
   ngOnInit() {
     // Reaguje na zmiany w parametrach przez co jest to:

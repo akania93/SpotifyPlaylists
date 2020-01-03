@@ -82,17 +82,14 @@ export class PlaylistsService {
     });
   }
 
-  deleteTrackFromPlaylist(playlistId, track) {
-    let playlist = this.playlists.find(playlist => playlist.id === parseInt(playlistId));
-    console.log("playlista po id: ", playlist);
+  deleteTrackFromPlaylist(playlist, track) {
+    let index = 0;
+    for( var i = 0; i < playlist.tracks.length; i++)
+      if ( playlist.tracks[i].id === track.id) 
+        index = i;
 
-  //   for( var i = 0; i < playlist.tracks.length; i++){ 
-  //     if ( playlist.tracks[i].id === track.id) {
-  //       playlist.tracks.splice(i, 1); 
-  //       console.log("po usunieciu: ", playlist.track);
-  //       this.savePlaylist(playlist).subscribe();
-  //     }
-  //  }
+    playlist.tracks.splice(index, 1); 
+    this.savePlaylist(playlist).subscribe();
   }
 
   getPlaylistCategories() {
