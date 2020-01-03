@@ -30,6 +30,9 @@ export class MusicSearchService {
     .do(albums => {this.albums = albums})
     .subscribe((albums) => {
       this.albumsStream.next(this.albums);
+    },
+    (error) => {
+      console.log("music-search.service ERROR: ", error);
     })
   }
 

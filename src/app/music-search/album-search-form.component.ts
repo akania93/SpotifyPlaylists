@@ -32,7 +32,7 @@ export class AlbumSearchFormComponent implements OnInit {
     .subscribe(
       (value) => {
         this.musicSearchService.search(value);
-        console.warn('Wyszukałem: ', value);
+        console.log('Wyszukałem: ', value);
       }
     )
   }

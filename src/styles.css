@@ -23,6 +23,8 @@
 #MainNavbar .navbar-brand {
     display: flex;
     align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 #MainNavbar .navbar-brand img {
     width: 45px;

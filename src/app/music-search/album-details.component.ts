@@ -36,6 +36,9 @@ export class AlbumDetailsComponent implements OnInit {
     this.musicSearchService.getAlbum(id) // 0sNOF9WDwhWunNAHPD3Baj
     .subscribe(album => {
       this.album = album;
+    },
+    (error) => {
+      console.log("album-details.component ERROR: ", error);
     });
   }
 
