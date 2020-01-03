@@ -6,12 +6,12 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'album-details',
   template: `
     <div class="row mt-4" *ngIf="album">
-      <div class="col-5 mt-4">
+      <div class="col-sm-12 col-md-5 mt-4">
 
         <album-card class="card" [album]="album"></album-card>
         
       </div>
-      <div class="col-7">
+      <div class="col-sm-12 col-md-7">
         <h4 class="display-3 mb-2 float-right">Utwory</h4>
         
         <track-list [tracks]="album.tracks.items"></track-list>

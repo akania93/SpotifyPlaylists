@@ -4,11 +4,11 @@ import { Component, OnInit } from '@angular/core';
   selector: 'nav-bar',
   template: `
   
-  <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+  <nav id="MainNavbar" class="navbar navbar-expand-lg sticky-top navbar-light">
 
     <a class="navbar-brand" routerLink="/">
       <img src="favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="">
-      SpotifyPlaylists
+      <span class="navbar-app-name">SpotifyPlaylists</span>
     </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -17,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
           <a class="nav-link" routerLink="/music" routerLinkActive="active">Szukaj muzyki</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/playlist" routerLinkActive="active"> Twoje Playlisty </a>
+          <a class="nav-link" routerLink="/playlist" routerLinkActive="active"> Twoje playlisty </a>
         </li>
       </ul>
     </div>
@@ -52,7 +52,7 @@ import { Component, OnInit } from '@angular/core';
           <a class="nav-link" routerLink="/music" routerLinkActive="active">Szukaj muzyki</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/playlist" routerLinkActive="active"> Twoje Playlisty </a>
+          <a class="nav-link" routerLink="/playlist" routerLinkActive="active"> Twoje playlisty </a>
         </li>
 
       </ul>

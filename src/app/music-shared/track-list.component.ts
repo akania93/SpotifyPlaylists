@@ -43,11 +43,11 @@ import { PlaylistSelectionService } from './playlist-selection.service';
         <td>{{i+1}}</td>
         <td><a [href]="track.external_urls.spotify" target="_blank">{{track.name}}</a></td>
         <td><a [href]="track.artists[0].external_urls.spotify" target="_blank">{{track.artists[0].name}}</a></td>
-        <td class="btn-group-sm float-right" role="group">
-          <!-- <i class="fa fa-play"></i></button> -->
-          <button class="btn btn-sm btn-primary mr-1" (click)="play(audio_id, track)">></button>
-          <button class="btn btn-sm btn-success" (click)="addToPlaylist(track)">+</button>
-          <button *ngIf="isInsidePlaylist" class="btn btn-sm btn-danger ml-1" (click)="onDelete(track)">x</button>
+        <td class="btn-group float-right" role="group">
+          <!-- <i class="fa fa-play"></i> -->
+          <button class="btn btn-sm btn-primary mr-1" *ngIf="track.preview_url" (click)="play(audio_id, track)"><i class="fa fa-play"></i></button>
+          <button class="btn btn-sm btn-success" (click)="addToPlaylist(track)"><i class="fa fa-plus"></i></button>
+          <button class="btn btn-sm btn-danger ml-1" *ngIf="isInsidePlaylist"  (click)="onDelete(track)"><i class="fa fa-times"></i></button>
         </td>
       </tr>
     </tbody>

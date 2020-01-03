@@ -2,15 +2,26 @@
   
   <nav-bar></nav-bar>
 
-  <div class="container">
+  <div id="MainContent" class="container">
     <router-outlet></router-outlet>
   </div>
 
   <!-- Footer -->
-<footer class="page-footer font-small blue pt-4">
-  <div class="footer-copyright text-center py-3">© {{currentDate}} Copyright:
-    <a href="https://github.com/akania93" target="_blank"> arka</a>
-  </div>
-</footer>
-
+  <footer id="MainFooter" class="page-footer font-small bg-light">
+    <div class="footer-copyright text-center py-3">© {{currentDate}} Copyright:
+      <a href="https://github.com/akania93" target="_blank"> arka</a>
+      <div class="footer-icons">
+        <a href="https://arturkania.wordpress.com/" target="_blank">
+          <i class="fa fa-home"> </i>
+        </a>
+        <a href="https://www.linkedin.com/in/artur-kania-9560a5112/" target="_blank">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/akania93" target="_blank">
+          <i class="fa fa-github"> </i>
+        </a>
+      </div>
+    </div>
+  </footer>
+  
 </div>

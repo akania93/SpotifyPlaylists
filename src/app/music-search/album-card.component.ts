@@ -16,6 +16,10 @@ import { Component, OnInit, Input } from '@angular/core';
       margin-right: 0;
     }
 
+    :host():hover {
+      cursor: pointer;
+    }
+
     :host():hover .card-img-overlay{
       top: 100%;
     }

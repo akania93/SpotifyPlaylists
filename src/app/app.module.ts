@@ -8,11 +8,10 @@ import { MusicSharedModule } from './music-shared/music-shared.module';
 
 import { PlaylistsService } from './playlists/playlists.service';
 import { PlaylistSelectionService } from './music-shared/playlist-selection.service';
+import { AuthService } from './auth.service';
 
 // routing
 import { routerModule } from './app.routing';
-
-import { AuthService } from './auth.service';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';

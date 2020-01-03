@@ -1,22 +1,24 @@
 <div class="row mt-3">
     <div class="col">
-      <h5 class="display-4 float-right mb-2">Twoje Playlisty</h5>
+      <h5 class="display-4 float-right mb-2">Twoje playlisty</h5>
     </div>
 </div>
 
 <div class="row mt-1">
 
+  <!-- Lista -->
+  <div class="col-sm-12 col-lg-5 mb-md-3">
+    <playlists-list></playlists-list>
+  </div>
+
   <!-- Zagnieżdżony routing -->
   <!-- W środek leci playlist-detail lub playlist-form  --> 
-  <div class="col-md-6">
+  <div class="col-sm-12 col-lg-7 order-lg-first">
     <content-card>
         <router-outlet></router-outlet>
     </content-card>
   </div>
 
-  <!-- Lista -->
-  <div class="col-md-6">
-    <playlists-list></playlists-list>
-  </div>
+  
 
 </div>

@@ -22,6 +22,10 @@ import { PlaylistsService, Playlist } from './playlists.service';
     table tbody tr td label {
       margin-bottom: 0;
     }
+
+    i.fa-star {
+      color: #ffc107;
+    }
     `
   ],
   template: `
@@ -32,7 +36,6 @@ import { PlaylistsService, Playlist } from './playlists.service';
           <th> # </th>
           <th> Nazwa </th>
           <th> Utworów </th>
-          <th> Ulubiona </th>
           <th></th>
         </tr>
       </thead>
@@ -41,12 +44,12 @@ import { PlaylistsService, Playlist } from './playlists.service';
           [ngStyle]="{ borderLeftColor: playlist.color }"
           [routerLink]="[playlist.id]" routerLinkActive="table-active">
           <td> {{ i + 1 }}. </td>
-          <td> {{ playlist.name }} </td>
-          <td> {{ playlist.tracks.length }} </td>
-          <td>
-            <input type="checkbox" [(ngModel)]="playlist.favourite" disabled>
+          <td> 
+            {{ playlist.name }} 
+            <span *ngIf="playlist.favourite"><i class="fa fa-star pl-1"></i></span> 
           </td>
-          <td><button class="btn btn-sm btn-danger" (click)="delete(playlist)">X</button></td>
+          <td> {{ playlist.tracks.length }} </td>
+          <td><button class="btn btn-sm btn-danger" (click)="delete(playlist)"><i class="fa fa-times"></i></button></td>
         </tr>
       </tbody>
     </table>
