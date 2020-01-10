@@ -6,7 +6,11 @@ import { Subject, Observable } from 'rxjs';
 export class PlaylistsService {
 
   server_url = 'http://localhost:3000/playlists/';
-  server_url_playlistCategories = 'http://localhost:3000/playlistCategories/';
+  // server_url_playlistCategories = 'http://localhost:3000/playlistCategories/';
+
+  // server_url = 'http://localhost:51706/api/Playlists/';
+  server_url_playlistCategories = 'http://localhost:51706/api/PlaylistCategories/aslist';
+
   playlists = [];
   playlists$ = new Subject<Playlist[]>();
 
@@ -43,9 +47,10 @@ export class PlaylistsService {
     return {
       name: '',
       description: '',
-      tracks: [],
       color: '#FF0000',
-      favourite: false
+      favourite: false,
+      category: '',
+      tracks: []
     };
   }
 
@@ -102,7 +107,20 @@ export class PlaylistsService {
 export interface Playlist {
   name: string,
   description: string,
-  tracks: any[],
   color: string,
-  favourite: boolean
+  favourite: boolean,
+  category: string,
+  tracks: any[]
+}
+export interface Track {
+  name: string,
+  external_id: string,
+  duration_ms: number,
+  external_url_spotify: string,
+  preview_url: string,
+  artists: any[]
+}
+export interface Artist {
+  name: string,
+  external_url_spotify: string
 }

@@ -41,8 +41,8 @@ import { PlaylistSelectionService } from './playlist-selection.service';
       <tr *ngFor="let track of tracks; let i=index">
         <!--<td>{{track.track_number}}</td>-->
         <td>{{i+1}}</td>
-        <td><a [href]="track.external_urls.spotify" target="_blank">{{track.name}}</a></td>
-        <td><a [href]="track.artists[0].external_urls.spotify" target="_blank">{{track.artists[0].name}}</a></td>
+        <td><a [href]="track.external_url_spotify" target="_blank">{{track.name}}</a></td>
+        <td><a [href]="track.artists[0].external_url_spotify" target="_blank">{{track.artists[0].name}}</a></td>
         <td class="btn-group float-right" role="group">
           <!-- <i class="fa fa-play"></i> -->
           <button class="btn btn-sm btn-primary mr-1" *ngIf="track.preview_url" (click)="play(audio_id, track)"><i class="fa fa-play"></i></button>

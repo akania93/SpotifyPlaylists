@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
       <div class="col-sm-12 col-md-7">
         <h4 class="display-3 mb-2 float-right">Utwory</h4>
         
-        <track-list [tracks]="album.tracks.items"></track-list>
+        <track-list [tracks]="album.tracks"></track-list>
 
       </div>
     </div>
@@ -23,23 +23,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AlbumDetailsComponent implements OnInit {
 
-  constructor(private musicSearchService:MusicSearchService,
-              private activeRoute: ActivatedRoute) 
-  { 
+  constructor(private musicSearchService: MusicSearchService,
+    private activeRoute: ActivatedRoute) {
   }
 
   album;
 
   ngOnInit() {
     let id = this.activeRoute.snapshot.params['album_id'];
-    
-    this.musicSearchService.getAlbum(id) // 0sNOF9WDwhWunNAHPD3Baj
-    .subscribe(album => {
-      this.album = album;
-    },
-    (error) => {
-      console.log("album-details.component ERROR: ", error);
-    });
-  }
 
+    this.musicSearchService.getAlbum(id)
+      .subscribe(
+        album => {
+          let mappedAlbum = this.musicSearchService.mapSpotifyAlbumToApiAlbum(album);
+          this.album = mappedAlbum;
+        },
+        (error) => {
+          console.log("album-details.component ERROR: ", error);
+        });
+  }
 }

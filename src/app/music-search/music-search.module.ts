@@ -9,6 +9,7 @@ import { AlbumCardComponent } from './album-card.component';
 import { MusicSearchService } from './music-search.service';
 import { AlbumSearchFormComponent } from './album-search-form.component';
 import { AlbumDetailsComponent } from './album-details.component';
+
 import { MusicSharedModule } from '../music-shared/music-shared.module';
 
 // routing
@@ -24,7 +25,11 @@ import { routerModule } from './music-search.routing';
     routerModule
   ],
   declarations: [
-    MusicSearchComponent, AlbumListComponent, AlbumCardComponent, AlbumSearchFormComponent, AlbumDetailsComponent
+    MusicSearchComponent, 
+    AlbumListComponent, 
+    AlbumCardComponent, 
+    AlbumSearchFormComponent, 
+    AlbumDetailsComponent
   ],
   exports: [
     MusicSearchComponent
