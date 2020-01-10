@@ -5,8 +5,8 @@ import { Observable, Subject } from 'rxjs';
 @Injectable()
 export class MusicSearchService {
 
-  albums = [];
-  albumsStream = new Subject();
+  albums: Album[] = [];
+  albumsStream = new Subject<Album[]>();
 
   constructor(private http: Http) {
     // pierwsze wywołanie na sztywno 'witcher'
@@ -28,7 +28,7 @@ export class MusicSearchService {
         return data.albums.items;
       })
       .do(albums => { this.albums = albums })
-      .subscribe((albums) => {
+      .subscribe((albums: Album[]) => {
         this.albumsStream.next(this.albums);
       },
         (error) => {
@@ -45,7 +45,7 @@ export class MusicSearchService {
 
   // mapper
   mapSpotifyAlbumToApiAlbum(album) {
-    let mappedAlbum = {
+    let mappedAlbum: Album = {
       name: album.name,
       images: album.images,
       tracks: album.tracks.items.map(tr => {
@@ -70,12 +70,22 @@ export class MusicSearchService {
 
 }
 
-interface Album {
+export interface Album {
   name: string,
   images: any[],
   tracks: Track[]
 }
-interface Track {
+export interface Playlist {
+  id?: number,
+  name: string,
+  description: string,
+  color: string,
+  favourite: boolean,
+  category: string,
+  tracks: Track[]
+}
+export interface Track {
+  id?: number,
   name: string,
   external_id: string,
   duration_ms: number,
@@ -83,7 +93,8 @@ interface Track {
   preview_url: string,
   artists: Artist[]
 }
-interface Artist {
+export interface Artist {
+  id?: number,
   name: string,
   external_url_spotify: string
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicSearchService } from './music-search.service'
 import { FormGroup, FormControl } from '@angular/forms'
-import { query } from '@angular/core/src/animation/dsl';
-import { switchMap } from 'rxjs/operator/switchMap';
 
 @Component({
   selector: 'album-search-form',
@@ -32,7 +30,6 @@ export class AlbumSearchFormComponent implements OnInit {
     .subscribe(
       (value) => {
         this.musicSearchService.search(value);
-        console.log('Wyszukałem: ', value);
       }
     )
   }

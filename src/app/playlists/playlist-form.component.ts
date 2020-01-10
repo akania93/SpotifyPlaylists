@@ -23,6 +23,15 @@ import { PlaylistsService, Playlist } from './playlists.service';
     .playlist-form-table {
       font-size: 12px;
     }
+
+    .color-label {
+      vertical-align: bottom;
+      margin-right: 8px;
+    }
+    .color-input {
+      width: 50px;
+      height: 40px;
+    }
     `
   ],
   template: `
@@ -84,8 +93,8 @@ import { PlaylistsService, Playlist } from './playlists.service';
         </div>
 
         <div class="form-group">
-          <label>Kolor:</label>
-          <input type="color" [(ngModel)]="playlist.color" name="color">
+          <label class="color-label">Kolor:</label>
+          <input type="color" class="color-input" [(ngModel)]="playlist.color" name="color">
 
           <label class="float-right"><input type="checkbox" [(ngModel)]="playlist.favourite" name="favourite">
             Ulubiona</label>
@@ -123,17 +132,17 @@ export class PlaylistFormComponent implements OnInit {
     });
 
     this.playlistsService.getPlaylistCategories()
-    .subscribe(response => {
+    .subscribe((response: any[]) => {
       this.categories = response;
     });
   }
 
-  save(playlist, valid) {
+  save(playlist: Playlist, valid) {
     if (!valid)
       return;
 
     this.playlistsService.savePlaylist(playlist)
-      .subscribe(addedOrUpdatedPlaylist => {
+      .subscribe((addedOrUpdatedPlaylist: Playlist) => {
         // Nawigacja z kodu
         this.router.navigate(['playlist', addedOrUpdatedPlaylist.id]);
       });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PlaylistsService } from '../playlists/playlists.service';
+import { PlaylistsService, Track, Playlist } from '../playlists/playlists.service';
 import { Subject, Observable } from 'rxjs';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class PlaylistSelectionService {
   constructor(private playlistsService: PlaylistsService) { 
     
     this.playlistsService.getPlaylistsStream$()
-      .subscribe(playlists => {
+      .subscribe((playlists: Playlist[]) => {
         if(!this.selectedId)
           this.select(playlists[0]);
       })
@@ -26,7 +26,7 @@ export class PlaylistSelectionService {
     this.selectedIdStream$.next(this.selectedId);
   }
 
-  addToPlaylist(track) {
+  addToPlaylist(track: Track) {
     this.playlistsService.addTrackToPlaylist(this.selectedId, track);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Album } from './music-search.service'
 
 @Component({
   selector: 'album-card',
@@ -42,13 +43,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AlbumCardComponent implements OnInit {
 
-  @Input('album') 
+  @Input('album')
   set setAlbum(album) {
     this.album = album;
     this.image = album.images[0];
   }
-  
-  album;
+
+  album: Album;
   image;
 
   constructor() { }

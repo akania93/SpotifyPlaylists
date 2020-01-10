@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicSearchService } from './music-search.service'
+import { MusicSearchService, Album } from './music-search.service'
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
 })
 export class AlbumListComponent implements OnInit {
 
-  albums: Observable<any>;
+  albums: Observable<Album[]>;
 
   constructor(private musicSearchService: MusicSearchService) { }
 

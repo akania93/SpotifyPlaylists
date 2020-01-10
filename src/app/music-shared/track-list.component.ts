@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlaylistSelectionService } from './playlist-selection.service';
+import { Track} from '../playlists/playlists.service';
 
 @Component({
   selector: 'track-list',
@@ -56,7 +57,7 @@ import { PlaylistSelectionService } from './playlist-selection.service';
 })
 export class TrackListComponent implements OnInit {
 
-  @Input() tracks;
+  @Input() tracks: Track[];
   @Input() isInsidePlaylist: boolean = false;
   @Output() onDeleteTrack = new EventEmitter();
 
@@ -64,7 +65,7 @@ export class TrackListComponent implements OnInit {
 
   ngOnInit() {  }
 
-  play(audio, track) {
+  play(audio, track: Track) {
     audio.volume = 0.1;
 
     if(audio.src != track.preview_url) {
@@ -78,11 +79,11 @@ export class TrackListComponent implements OnInit {
     }
   }
 
-  addToPlaylist(track) {
+  addToPlaylist(track: Track) {
     this.playlistSelectionService.addToPlaylist(track);
   }
 
-  onDelete(track) {
+  onDelete(track: Track) {
     this.onDeleteTrack.emit(track);
   }
 

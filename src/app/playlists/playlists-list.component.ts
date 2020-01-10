@@ -64,7 +64,7 @@ import { PlaylistsService, Playlist } from './playlists.service';
 })
 export class PlaylistsListComponent implements OnInit {
 
-  playlists = [];
+  playlists: Playlist[] = [];
 
   constructor(private playlistsService: PlaylistsService) { }
 
@@ -75,7 +75,7 @@ export class PlaylistsListComponent implements OnInit {
     });
   }
 
-  delete(playlist) {
+  delete(playlist: Playlist) {
     this.playlistsService.deletePlaylist(playlist);
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlaylistSelectionService } from './playlist-selection.service';
-import { PlaylistsService } from '../playlists/playlists.service';
+import { PlaylistsService, Playlist } from '../playlists/playlists.service';
 
 @Component({
   selector: 'playlist-selector',
@@ -29,7 +29,7 @@ import { PlaylistsService } from '../playlists/playlists.service';
 export class PlaylistSelectorComponent implements OnInit {
 
   selectedId;
-  playlists = [];
+  playlists: Playlist[] = [];
 
   constructor(private playlistSelectionService: PlaylistSelectionService,
               private playlistsService: PlaylistsService) { }
@@ -45,7 +45,7 @@ export class PlaylistSelectorComponent implements OnInit {
     })
 
     this.playlistsService.getPlaylistsStream$()
-    .subscribe(playlists => {
+    .subscribe((playlists: Playlist[]) => {
       this.playlists = playlists;
     })
   }

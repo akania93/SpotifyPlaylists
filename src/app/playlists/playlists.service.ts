@@ -5,13 +5,13 @@ import { Subject, Observable } from 'rxjs';
 @Injectable()
 export class PlaylistsService {
 
-  server_url = 'http://localhost:3000/playlists/';
+  // server_url = 'http://localhost:3000/playlists/';
   // server_url_playlistCategories = 'http://localhost:3000/playlistCategories/';
 
-  // server_url = 'http://localhost:51706/api/Playlists/';
+  server_url = 'http://localhost:51706/api/Playlists/';
   server_url_playlistCategories = 'http://localhost:51706/api/PlaylistCategories/aslist';
 
-  playlists = [];
+  playlists: Playlist[] = [];
   playlists$ = new Subject<Playlist[]>();
 
   /* Wstrzykiwanie playlist z pliku */
@@ -20,19 +20,19 @@ export class PlaylistsService {
   //   this.playlists = playlistsData === null? this.playlists : playlistsData;
   // }
 
-  constructor(private http: Http) {  }
+  constructor(private http: Http) { }
 
   getPlaylists() {
     return this.http.get(this.server_url)
-          .map( response => response.json())
-          .subscribe( playlists => {
-            this.playlists = playlists;
-            this.playlists$.next(this.playlists);
-          })
+      .map(response => response.json())
+      .subscribe((playlists: Playlist[]) => {
+        this.playlists = playlists;
+        this.playlists$.next(this.playlists);
+      })
   }
 
   getPlaylistsStream$() {
-    if(!this.playlists.length){
+    if (!this.playlists.length) {
       this.getPlaylists();
     }
     return Observable.from(this.playlists$).startWith(this.playlists);
@@ -40,7 +40,7 @@ export class PlaylistsService {
 
   getPlaylist(id) {
     return this.http.get(this.server_url + id)
-        .map( response => response.json())
+      .map(response => response.json())
   }
 
   createPlaylist(): Playlist {
@@ -54,11 +54,11 @@ export class PlaylistsService {
     };
   }
 
-  savePlaylist(playlist) {
+  savePlaylist(playlist: Playlist) {
     let request;
 
     // Jeśli obiekt o takim id już jest w liście => podmieniamy.
-    if(playlist.id){
+    if (playlist.id) {
       request = this.http.put(this.server_url + playlist.id, playlist);
     }
     else { // nowy element
@@ -66,61 +66,76 @@ export class PlaylistsService {
     }
 
     return request.map(response => response.json())
-    .do(addedOrUpdatedPlaylist => {
-      // W tym momencie ktoś w innym miejscu mógł dodać też playlisty.
-      // Więc aby wszystkie komponenty były zaktualizowane robię:
-      this.getPlaylists();
-    });
+      .do(addedOrUpdatedPlaylist => {
+        // W tym momencie ktoś w innym miejscu mógł dodać też playlisty.
+        // Więc aby wszystkie komponenty były zaktualizowane robię:
+        this.getPlaylists();
+      });
     // subscribe będzie w playlist-form.component
   }
 
-  addTrackToPlaylist(playlistId, track) {
-    let playlist = this.playlists.find(playlist => playlist.id === parseInt(playlistId));
-    playlist.tracks.push(track);
-    this.savePlaylist(playlist).subscribe();
+  addTrackToPlaylist(playlistId, track: Track) {
+    let playlist: Playlist = this.playlists.find(playlist => playlist.id === parseInt(playlistId));
+
+    var existIds = playlist.tracks.map(x => x.external_id);
+    if (existIds.indexOf(track.external_id) === -1) {
+      playlist.tracks.push(track);
+      this.savePlaylist(playlist).subscribe();
+    }
+    else {
+      alert(`Playlista "${playlist.name}" zawiera już piosenkę "${track.name}".`);
+    }
   }
 
-  deletePlaylist(playlist) {
+  deletePlaylist(playlist: Playlist) {
     this.http.delete(this.server_url + playlist.id)
-    .subscribe(response => {
-      this.getPlaylists();
-    });
+      .subscribe(response => {
+        this.getPlaylists();
+      });
   }
 
-  deleteTrackFromPlaylist(playlist, track) {
+  deleteTrackFromPlaylist(playlist: Playlist, track: Track) {
     let index = 0;
-    for( var i = 0; i < playlist.tracks.length; i++)
-      if ( playlist.tracks[i].id === track.id) 
+    for (var i = 0; i < playlist.tracks.length; i++)
+      if (playlist.tracks[i].id === track.id)
         index = i;
 
-    playlist.tracks.splice(index, 1); 
+    playlist.tracks.splice(index, 1);
     this.savePlaylist(playlist).subscribe();
   }
 
   getPlaylistCategories() {
     return this.http.get(this.server_url_playlistCategories)
-      .map( response => response.json())
+      .map(response => response.json())
   }
 
 }
 
+export interface Album {
+  name: string,
+  images: any[],
+  tracks: Track[]
+}
 export interface Playlist {
+  id?: number,
   name: string,
   description: string,
   color: string,
   favourite: boolean,
   category: string,
-  tracks: any[]
+  tracks: Track[]
 }
 export interface Track {
+  id?: number,
   name: string,
   external_id: string,
   duration_ms: number,
   external_url_spotify: string,
   preview_url: string,
-  artists: any[]
+  artists: Artist[]
 }
 export interface Artist {
+  id?: number,
   name: string,
   external_url_spotify: string
 }

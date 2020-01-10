@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicSearchService } from './music-search.service';
 import { ActivatedRoute } from '@angular/router';
+import { Album } from './music-search.service';
 
 @Component({
   selector: 'album-details',
@@ -27,14 +28,14 @@ export class AlbumDetailsComponent implements OnInit {
     private activeRoute: ActivatedRoute) {
   }
 
-  album;
+  album: Album;
 
   ngOnInit() {
     let id = this.activeRoute.snapshot.params['album_id'];
 
     this.musicSearchService.getAlbum(id)
       .subscribe(
-        album => {
+        (album: Album) => {
           let mappedAlbum = this.musicSearchService.mapSpotifyAlbumToApiAlbum(album);
           this.album = mappedAlbum;
         },
