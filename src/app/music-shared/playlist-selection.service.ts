@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { PlaylistsService, Track, Playlist } from '../playlists/playlists.service';
+import { PlaylistsService } from '../playlists/playlists.service';
 import { Subject, Observable } from 'rxjs';
+import { Track, Playlist } from '../models';
 
 @Injectable()
 export class PlaylistSelectionService {

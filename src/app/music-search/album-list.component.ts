@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicSearchService, Album } from './music-search.service'
+import { MusicSearchService } from './music-search.service'
 import { Observable } from 'rxjs';
+import { Album } from '../models';
 
 @Component({
   selector: 'album-list',

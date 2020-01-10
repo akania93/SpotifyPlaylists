@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlaylistSelectionService } from './playlist-selection.service';
-import { Track} from '../playlists/playlists.service';
+import { Track } from '../models';
 
 @Component({
   selector: 'track-list',

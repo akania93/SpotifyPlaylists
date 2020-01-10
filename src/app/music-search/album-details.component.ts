@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicSearchService } from './music-search.service';
 import { ActivatedRoute } from '@angular/router';
-import { Album } from './music-search.service';
+import { Album } from '../models';
 
 @Component({
   selector: 'album-details',

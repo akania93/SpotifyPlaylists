@@ -1,20 +1,23 @@
 import { Injectable, Inject, Optional } from '@angular/core';
 import { Http } from '@angular/http';
 import { Subject, Observable } from 'rxjs';
+import { Playlist, Track } from '../models';
 
 @Injectable()
 export class PlaylistsService {
 
+  /* Poprzez json-server i plik server.data.json */
   // server_url = 'http://localhost:3000/playlists/';
   // server_url_playlistCategories = 'http://localhost:3000/playlistCategories/';
 
+  /* SpotifyPlayliststAPI */
   server_url = 'http://localhost:51706/api/Playlists/';
   server_url_playlistCategories = 'http://localhost:51706/api/PlaylistCategories/aslist';
 
   playlists: Playlist[] = [];
   playlists$ = new Subject<Playlist[]>();
 
-  /* Wstrzykiwanie playlist z pliku */
+  /* Wstrzykiwanie playlist z pliku playlists.data.ts */
   // Tutaj musimy użyć pełnego zapisu bo to nie jest klasa (to string) - nie ma typu.
   // constructor(@Optional() @Inject('PlaylistsData') playlistsData) {
   //   this.playlists = playlistsData === null? this.playlists : playlistsData;
@@ -109,33 +112,4 @@ export class PlaylistsService {
       .map(response => response.json())
   }
 
-}
-
-export interface Album {
-  name: string,
-  images: any[],
-  tracks: Track[]
-}
-export interface Playlist {
-  id?: number,
-  name: string,
-  description: string,
-  color: string,
-  favourite: boolean,
-  category: string,
-  tracks: Track[]
-}
-export interface Track {
-  id?: number,
-  name: string,
-  external_id: string,
-  duration_ms: number,
-  external_url_spotify: string,
-  preview_url: string,
-  artists: Artist[]
-}
-export interface Artist {
-  id?: number,
-  name: string,
-  external_url_spotify: string
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Album } from './music-search.service'
+import { Album } from '../models';
 
 @Component({
   selector: 'album-card',
