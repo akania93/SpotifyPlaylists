@@ -14,8 +14,8 @@ Aplikacja angularowa + Rest Api w .NET Core z wykorzystaniem Spotify Web API do 
 * strona jest w pełni responsywna (RWD),
 * wykorzystuje Streamy (biblioteka rxjs),
 * wykorzystuje Bootstrap 4,
-* korzysta z Spotify Web API + Swagger w wersji 4.0.1,
-* backend napisany w .NET Core (Restful Api),
+* korzysta z Spotify Web API,
+* backend napisany w .NET Core (Restful Api) + Swagger w wersji 4.0.1,
 * baza danych sqlite.
 
 ## Najważniejsze wykorzystane biblioteki
